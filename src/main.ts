@@ -1,4 +1,3 @@
-import { CircularQueue } from './data-structures/queue/circular-queue';
 import { Queue } from './data-structures/queue/queue';
 import { Stack } from './data-structures/stack/stack';
 

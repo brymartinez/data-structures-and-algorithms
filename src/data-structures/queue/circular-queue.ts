@@ -14,6 +14,8 @@ export class CircularQueue<T> extends Queue<T> {
       this.rear = (this.rear + 1) % this.capacity;
       this.arr[this.rear] = element;
       console.log(this.arr);
+    } else {
+      throw new Error('Queue is already full.');
     }
   }
 
@@ -29,6 +31,8 @@ export class CircularQueue<T> extends Queue<T> {
       }
 
       return value;
+    } else {
+      throw new Error('Queue is already empty.');
     }
   }
 
