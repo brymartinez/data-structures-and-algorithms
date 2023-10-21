@@ -1,3 +1,4 @@
+import { Queue } from './data-structures/queue';
 import { Stack } from './data-structures/stack';
 
 (async () => {
@@ -16,4 +17,18 @@ import { Stack } from './data-structures/stack';
   }
 
   console.log(reversedString.join('')); // should be dlroW olleH
+})();
+
+(async () => {
+  // Queue example - Reversing a word
+  const queue = new Queue(3);
+
+  queue.enqueue('first');
+  queue.enqueue('second');
+  queue.enqueue('third');
+
+  console.log(queue.dequeue());
+  console.log(queue.dequeue());
+  console.log(queue.dequeue());
+  console.log(queue.dequeue());
 })();
