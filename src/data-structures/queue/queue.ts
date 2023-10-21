@@ -1,8 +1,8 @@
 export class Queue<T = any> {
-  private arr: T[];
-  private front = -1;
-  private rear = -1;
-  private capacity: number;
+  protected arr: T[];
+  protected front = -1;
+  protected rear = -1;
+  protected capacity: number;
 
   constructor(size: number) {
     this.arr = new Array<T>(size);
@@ -39,7 +39,6 @@ export class Queue<T = any> {
   }
 
   public isFull() {
-    console.log(this.capacity, this.rear);
     return this.front === 0 && this.rear === this.capacity - 1;
   }
 
