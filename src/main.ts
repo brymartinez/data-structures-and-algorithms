@@ -1,5 +1,5 @@
-import { Queue } from './data-structures/queue';
-import { Stack } from './data-structures/stack';
+import { Queue } from './data-structures/queue/queue';
+import { Stack } from './data-structures/stack/stack';
 
 (async () => {
   // Stack example - Reversing a word
@@ -20,14 +20,13 @@ import { Stack } from './data-structures/stack';
 })();
 
 (async () => {
-  // Queue example - Reversing a word
+  // Queue example - Call center
   const queue = new Queue(3);
 
   queue.enqueue('first');
   queue.enqueue('second');
   queue.enqueue('third');
 
-  console.log(queue.dequeue());
   console.log(queue.dequeue());
   console.log(queue.dequeue());
   console.log(queue.dequeue());
