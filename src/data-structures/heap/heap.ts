@@ -14,7 +14,9 @@ export class Heap {
 
     const lastIndex = this.heapTree.length - 1;
 
-    this.swap(lastIndex, elementIndex);
+    if (elementIndex !== lastIndex) {
+      this.swap(lastIndex, elementIndex);
+    }
 
     this.heapTree.pop();
 
