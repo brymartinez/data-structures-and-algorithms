@@ -1,3 +1,4 @@
+import { Heap } from './data-structures/heap/heap';
 import { Queue } from './data-structures/queue/queue';
 import { Stack } from './data-structures/stack/stack';
 
@@ -30,4 +31,18 @@ import { Stack } from './data-structures/stack/stack';
   console.log(queue.dequeue());
   console.log(queue.dequeue());
   console.log(queue.dequeue());
+})();
+
+(async () => {
+  // Queue example - Call center
+  const heap = new Heap();
+  heap.insert(3);
+  heap.insert(9);
+  heap.insert(2);
+  heap.insert(1);
+  heap.insert(4);
+  heap.insert(5);
+  heap.display();
+  heap.insert(7);
+
 })();
