@@ -44,5 +44,4 @@ import { Stack } from './data-structures/stack/stack';
   heap.insert(5);
   heap.display();
   heap.insert(7);
-
 })();

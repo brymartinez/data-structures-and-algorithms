@@ -1,5 +1,6 @@
 export class Heap {
   private heapTree: Array<number> = [];
+
   public insert(element: number) {
     this.heapTree.push(element);
 
@@ -7,18 +8,43 @@ export class Heap {
       this.heapify();
     }
   }
-  
+
+  public delete(element: number) {
+    const elementIndex = this.heapTree.findIndex((node) => node === element);
+
+    const lastIndex = this.heapTree.length - 1;
+
+    this.swap(lastIndex, elementIndex);
+
+    this.heapTree.pop();
+
+    if (this.heapTree.length !== 1) {
+      this.heapify();
+    }
+  }
+
+  public display() {
+    return this.heapTree;
+  }
+
   // Max heap
   private heapify() {
     let index = this.heapTree.length - 1;
-    let lastElement = this.heapTree[index];
+    const lastElement = this.heapTree[index];
 
-    while(this.heapTree[this.getParentNode(index)] !== undefined && lastElement > this.heapTree[this.getParentNode(index)]) {
-      const temp = this.heapTree[this.getParentNode(index)];
-      this.heapTree[this.getParentNode(index)] = this.heapTree[index];
-      this.heapTree[index] = temp;
+    while (
+      this.heapTree[this.getParentNode(index)] !== undefined &&
+      lastElement > this.heapTree[this.getParentNode(index)]
+    ) {
+      this.swap(index, this.getParentNode(index));
       index = this.getParentNode(index);
     }
+  }
+
+  private swap(firstIndex: number, secondIndex: number) {
+    const temp = this.heapTree[secondIndex];
+    this.heapTree[secondIndex] = this.heapTree[firstIndex];
+    this.heapTree[firstIndex] = temp;
   }
 
   private getParentNode(i: number) {
@@ -36,9 +62,4 @@ export class Heap {
   private isLeftSide(i: number) {
     return i % 2 !== 0;
   }
-
-  public display() {
-    return this.heapTree;
-  }
-
 }

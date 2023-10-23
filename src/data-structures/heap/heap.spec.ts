@@ -11,5 +11,7 @@ describe('Heap', () => {
     expect(heap.display()).toStrictEqual([9, 4, 3]);
     heap.insert(8);
     expect(heap.display()).toStrictEqual([9, 8, 3, 4]);
+    heap.delete(8);
+    expect(heap.display()).toStrictEqual([9, 4, 3]);
   });
 });
