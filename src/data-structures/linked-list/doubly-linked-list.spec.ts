@@ -29,5 +29,7 @@ describe('DoublyLinkedList', () => {
     expect(dlList.display()).toStrictEqual([1, 2, 2.5, 3]);
     dlList.delete(dllnode25);
     expect(dlList.display()).toStrictEqual([1, 2, 3]);
+    expect(dlList.search(2)).toStrictEqual(true);
+    expect(dlList.search(2.5)).toStrictEqual(false);
   });
 });

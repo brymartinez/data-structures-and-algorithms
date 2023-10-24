@@ -66,4 +66,17 @@ export class DoublyLinkedList<T = any> extends LinkedList<T> {
       node.prev.next = null;
     }
   }
+
+  search(element: T): boolean {
+    let currentNode = this.head;
+
+    while (currentNode) {
+      if (currentNode.data === element) {
+        return true;
+      }
+      currentNode = currentNode.next;
+    }
+
+    return false;
+  }
 }
