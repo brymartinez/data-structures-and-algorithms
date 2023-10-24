@@ -84,11 +84,19 @@ import { Stack } from './data-structures/stack/stack';
   const dlList = new DoublyLinkedList(dllnode1);
   console.log(dlList.head.next.prev.data); // 1
 
-  dlList.insertStart(0);
+  const dllnode0 = dlList.insertStart(0);
   console.log(dlList.head.data); // 0
   console.log(dlList.head.next.data); // 1
   console.log(dlList.head.prev); // null
 
-  dlList.insertEnd(4);
-  console.log(dlList.head.next.next.next.next);
+  const dllnode4 = dlList.insertEnd(4);
+  console.log(dlList.display());
+  const dllnode25 = dlList.insertAfter(dllnode2, 2.5);
+  console.log(dlList.display());
+  dlList.delete(dllnode0);
+  console.log(dlList.display());
+  dlList.delete(dllnode4);
+  console.log(dlList.display());
+  dlList.delete(dllnode25);
+  console.log(dlList.display());
 })();

@@ -14,7 +14,16 @@ export class DoublyLinkedList<T = any> extends LinkedList<T> {
     this.prev = null;
   }
 
-  display() {}
+  display(): T[] {
+    const result = [];
+    let node = this.head;
+    while (node) {
+      result.push(node.data);
+      node = node.next;
+    }
+
+    return result;
+  }
 
   insertStart(data: T) {
     const node = new DoublyLinkedListNode(data);
@@ -22,6 +31,16 @@ export class DoublyLinkedList<T = any> extends LinkedList<T> {
     node.prev = null;
     this.head.prev = node;
     this.head = node;
+    return node;
+  }
+
+  insertAfter(prevNode: DoublyLinkedListNode, data: T) {
+    const node = new DoublyLinkedListNode(data);
+    node.prev = prevNode;
+    node.next = prevNode.next;
+    prevNode.next.prev = prevNode;
+    prevNode.next = node;
+    return node;
   }
 
   insertEnd(data: T) {
@@ -32,5 +51,19 @@ export class DoublyLinkedList<T = any> extends LinkedList<T> {
       node.prev = finalNode;
     }
     finalNode.next = node;
+    return node;
+  }
+
+  delete(node: DoublyLinkedListNode) {
+    if (node.prev === null) {
+      // first node
+      node.next.prev = null;
+      this.head = node.next;
+    } else if (node.next && node.prev) {
+      node.prev.next = node.next;
+      node.next.prev = node.prev;
+    } else if (node.next === null) {
+      node.prev.next = null;
+    }
   }
 }
