@@ -32,4 +32,16 @@ describe('DoublyLinkedList', () => {
     expect(dlList.search(2)).toStrictEqual(true);
     expect(dlList.search(2.5)).toStrictEqual(false);
   });
+  it('sorts', () => {
+    const dlNode1 = new DoublyLinkedListNode(4);
+
+    const dlList = new DoublyLinkedList(dlNode1);
+    dlList.insertEnd(3);
+    dlList.insertEnd(2);
+    dlList.insertEnd(1);
+    expect(dlList.display()).toStrictEqual([4, 3, 2, 1]);
+    dlList.sort();
+    expect(dlList.display()).toStrictEqual([1, 2, 3, 4]);
+    console.log(dlList.head.next);
+  });
 });

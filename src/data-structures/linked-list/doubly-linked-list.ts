@@ -16,7 +16,9 @@ export class DoublyLinkedList<T = any> extends LinkedList<T> {
 
   display(): T[] {
     const result = [];
+
     let node = this.head;
+
     while (node) {
       result.push(node.data);
       node = node.next;
@@ -29,27 +31,49 @@ export class DoublyLinkedList<T = any> extends LinkedList<T> {
     const node = new DoublyLinkedListNode(data);
     node.next = this.head;
     node.prev = null;
-    this.head.prev = node;
+
+    if (this.head !== null) {
+      this.head.prev = node;
+    }
+
     this.head = node;
     return node;
   }
 
   insertAfter(prevNode: DoublyLinkedListNode, data: T) {
+    if (!prevNode) {
+      throw new Error('Previous node cannot be null.');
+    }
+
     const node = new DoublyLinkedListNode(data);
-    node.prev = prevNode;
+
     node.next = prevNode.next;
-    prevNode.next.prev = prevNode;
     prevNode.next = node;
+    node.prev = prevNode;
+
+    if (node.next !== null) {
+      node.next.prev = node;
+    }
+
     return node;
   }
 
   insertEnd(data: T) {
     const node = new DoublyLinkedListNode(data);
-    let finalNode = this.head.next;
-    while (finalNode.next) {
-      finalNode = finalNode.next;
-      node.prev = finalNode;
+
+    if (this.head === null) {
+      this.head = node;
+      return this.head;
     }
+
+    node.next = null;
+
+    let finalNode = this.head;
+
+    while (finalNode.next !== null) {
+      finalNode = finalNode.next;
+    }
+
     finalNode.next = node;
     return node;
   }
@@ -78,5 +102,28 @@ export class DoublyLinkedList<T = any> extends LinkedList<T> {
     }
 
     return false;
+  }
+
+  sort() {
+    let currentNode = this.head;
+    let index = null;
+    let temp: T;
+
+    if (this.head === null) {
+      return;
+    } else {
+      while (currentNode !== null) {
+        index = currentNode.next;
+        while (index !== null) {
+          if (currentNode.data > index.data) {
+            temp = currentNode.data;
+            currentNode.data = index.data;
+            index.data = temp;
+          }
+          index = index.next;
+        }
+        currentNode = currentNode.next;
+      }
+    }
   }
 }
