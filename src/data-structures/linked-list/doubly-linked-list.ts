@@ -1,17 +1,15 @@
 import { LinkedList, LinkedListNode } from './linked-list';
 
 export class DoublyLinkedListNode<T = any> extends LinkedListNode<T> {
-  prev: DoublyLinkedListNode<T>;
+  prev: DoublyLinkedListNode<T> = null;
   next: DoublyLinkedListNode<T> = null;
 }
 
 export class DoublyLinkedList<T = any> extends LinkedList<T> {
-  private prev: DoublyLinkedListNode<T>;
   head: DoublyLinkedListNode<T> = null;
   constructor(head: DoublyLinkedListNode<T> = null) {
     super(head);
     this.head = head;
-    this.prev = null;
   }
 
   display(): T[] {
@@ -27,7 +25,7 @@ export class DoublyLinkedList<T = any> extends LinkedList<T> {
     return result;
   }
 
-  insertStart(data: T) {
+  insertStart(data: T): DoublyLinkedListNode<T> {
     const node = new DoublyLinkedListNode(data);
     node.next = this.head;
     node.prev = null;
@@ -40,7 +38,10 @@ export class DoublyLinkedList<T = any> extends LinkedList<T> {
     return node;
   }
 
-  insertAfter(prevNode: DoublyLinkedListNode, data: T) {
+  insertAfter(
+    prevNode: DoublyLinkedListNode<T>,
+    data: T,
+  ): DoublyLinkedListNode<T> {
     if (!prevNode) {
       throw new Error('Previous node cannot be null.');
     }
@@ -58,7 +59,7 @@ export class DoublyLinkedList<T = any> extends LinkedList<T> {
     return node;
   }
 
-  insertEnd(data: T) {
+  insertEnd(data: T): DoublyLinkedListNode<T> {
     const node = new DoublyLinkedListNode(data);
 
     if (this.head === null) {
@@ -75,6 +76,7 @@ export class DoublyLinkedList<T = any> extends LinkedList<T> {
     }
 
     finalNode.next = node;
+    node.prev = finalNode;
     return node;
   }
 
@@ -87,6 +89,7 @@ export class DoublyLinkedList<T = any> extends LinkedList<T> {
       node.prev.next = node.next;
       node.next.prev = node.prev;
     } else if (node.next === null) {
+      // last node
       node.prev.next = null;
     }
   }

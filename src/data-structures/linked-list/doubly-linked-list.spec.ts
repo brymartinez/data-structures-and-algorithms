@@ -1,47 +1,140 @@
 import { DoublyLinkedList, DoublyLinkedListNode } from './doubly-linked-list';
 
 describe('DoublyLinkedList', () => {
-  it('should perform operations', () => {
-    const dllnode1 = new DoublyLinkedListNode(1);
-    const dllnode2 = new DoublyLinkedListNode(2);
-    const dllnode3 = new DoublyLinkedListNode(3);
+  describe('insertStart', () => {
+    it('should insert start with zero nodes', () => {
+      const dlList = new DoublyLinkedList();
 
-    dllnode1.next = dllnode2;
-    dllnode2.prev = dllnode1;
-    dllnode2.next = dllnode3;
-    dllnode3.next = null;
+      const dllnode1 = dlList.insertStart(1);
 
-    const dlList = new DoublyLinkedList(dllnode1);
-    expect(dlList.head.next.prev.data).toStrictEqual(1);
+      expect(dllnode1.data).toStrictEqual(1);
+      expect(dllnode1.next).toStrictEqual(null);
+      expect(dllnode1.prev).toStrictEqual(null);
+    });
+    it('should insert start with 1 node', () => {
+      const dllnode2 = new DoublyLinkedListNode(2);
+      const dlList = new DoublyLinkedList(dllnode2);
 
-    const dllnode0 = dlList.insertStart(0);
-    expect(dlList.head.data).toStrictEqual(0);
-    expect(dlList.head.next.data).toStrictEqual(1);
-    expect(dlList.head.prev).toStrictEqual(null);
+      const dllnode1 = dlList.insertStart(1);
 
-    const dllnode4 = dlList.insertEnd(4);
-    expect(dlList.display()).toStrictEqual([0, 1, 2, 3, 4]);
-    const dllnode25 = dlList.insertAfter(dllnode2, 2.5);
-    expect(dlList.display()).toStrictEqual([0, 1, 2, 2.5, 3, 4]);
-    dlList.delete(dllnode0);
-    expect(dlList.display()).toStrictEqual([1, 2, 2.5, 3, 4]);
-    dlList.delete(dllnode4);
-    expect(dlList.display()).toStrictEqual([1, 2, 2.5, 3]);
-    dlList.delete(dllnode25);
-    expect(dlList.display()).toStrictEqual([1, 2, 3]);
-    expect(dlList.search(2)).toStrictEqual(true);
-    expect(dlList.search(2.5)).toStrictEqual(false);
+      expect(dllnode1.data).toStrictEqual(1);
+      expect(dllnode1.next).toStrictEqual(dllnode2);
+      expect(dllnode1.prev).toStrictEqual(null);
+    });
   });
-  it('sorts', () => {
-    const dlNode1 = new DoublyLinkedListNode(4);
+  describe('insertAfter', () => {
+    it('should insert as last node', () => {
+      const dllnode1 = new DoublyLinkedListNode(1);
 
-    const dlList = new DoublyLinkedList(dlNode1);
-    dlList.insertEnd(3);
-    dlList.insertEnd(2);
-    dlList.insertEnd(1);
-    expect(dlList.display()).toStrictEqual([4, 3, 2, 1]);
-    dlList.sort();
-    expect(dlList.display()).toStrictEqual([1, 2, 3, 4]);
-    console.log(dlList.head.next);
+      const dlList = new DoublyLinkedList(dllnode1);
+      const dllnode2 = dlList.insertAfter(dllnode1, 2);
+      expect(dllnode2.data).toStrictEqual(2);
+      expect(dllnode2.next).toStrictEqual(null);
+      expect(dllnode2.prev).toStrictEqual(dllnode1);
+    });
+    it('should insert between 2 nodes', () => {
+      const dllnode1 = new DoublyLinkedListNode(1);
+
+      const dlList = new DoublyLinkedList(dllnode1);
+      const dllnode3 = dlList.insertAfter(dllnode1, 3);
+      const dllnode2 = dlList.insertAfter(dllnode1, 2);
+      expect(dllnode2.data).toStrictEqual(2);
+      expect(dllnode2.next).toStrictEqual(dllnode3);
+      expect(dllnode2.prev).toStrictEqual(dllnode1);
+    });
+    it('should not insert if node is null', () => {
+      const dllnode1 = new DoublyLinkedListNode(1);
+
+      const dlList = new DoublyLinkedList(dllnode1);
+      expect(() => dlList.insertAfter(null, 2)).toThrowError(
+        /Previous node cannot be null./,
+      );
+    });
+  });
+  describe('insertEnd', () => {
+    it('should insert end with zero nodes', () => {
+      const dlList = new DoublyLinkedList();
+
+      const dllnode1 = dlList.insertEnd(1);
+
+      expect(dllnode1.data).toStrictEqual(1);
+      expect(dllnode1.next).toStrictEqual(null);
+      expect(dllnode1.prev).toStrictEqual(null);
+    });
+    it('should insert end with > 0 nodes', () => {
+      const dllnode1 = new DoublyLinkedListNode(1);
+      const dlList = new DoublyLinkedList(dllnode1);
+
+      const dllnode2 = dlList.insertEnd(2);
+
+      expect(dllnode2.data).toStrictEqual(2);
+      expect(dllnode2.next).toStrictEqual(null);
+      expect(dllnode2.prev).toStrictEqual(dllnode1);
+      const dllnode3 = dlList.insertEnd(3);
+      expect(dllnode3.data).toStrictEqual(3);
+      expect(dllnode3.next).toStrictEqual(null);
+      expect(dllnode3.prev).toStrictEqual(dllnode2);
+    });
+  });
+  describe('delete', () => {
+    let dlList: DoublyLinkedList;
+    let dlnode1: DoublyLinkedListNode<number>;
+    let dlnode2: DoublyLinkedListNode<number>;
+    let dlnode3: DoublyLinkedListNode<number>;
+
+    beforeEach(() => {
+      dlList = new DoublyLinkedList();
+      dlnode1 = dlList.insertStart(1);
+      dlnode2 = dlList.insertStart(2);
+      dlnode3 = dlList.insertStart(3);
+    });
+
+    it('should delete last node', () => {
+      dlList.delete(dlnode1);
+      expect(dlnode2.data).toStrictEqual(2);
+      expect(dlnode2.next).toStrictEqual(null);
+      expect(dlnode2.prev).toStrictEqual(dlnode3);
+    });
+    it('should delete first node', () => {
+      dlList.delete(dlnode3);
+      expect(dlnode2.data).toStrictEqual(2);
+      expect(dlnode2.next).toStrictEqual(dlnode1);
+      expect(dlnode2.prev).toStrictEqual(null);
+    });
+    it('should delete middle node', () => {
+      dlList.delete(dlnode2);
+      expect(dlnode3.data).toStrictEqual(3);
+      expect(dlnode3.next).toStrictEqual(dlnode1);
+      expect(dlnode3.prev).toStrictEqual(null);
+      expect(dlnode1.data).toStrictEqual(1);
+      expect(dlnode1.next).toStrictEqual(null);
+      expect(dlnode1.prev).toStrictEqual(dlnode3);
+    });
+  });
+  describe('sort', () => {
+    it('should sort in ascending order', () => {
+      const dlList = new DoublyLinkedList();
+      dlList.insertStart(1);
+      dlList.insertStart(2);
+      dlList.insertStart(3);
+      dlList.sort();
+      expect(dlList.display()).toStrictEqual([1, 2, 3]);
+    });
+    it('should not throw on empty list', () => {
+      const dlList = new DoublyLinkedList();
+      expect(() => dlList.sort()).not.toThrow();
+    });
+  });
+  describe('search', () => {
+    const dlList = new DoublyLinkedList();
+    dlList.insertStart(1);
+    dlList.insertStart(2);
+    dlList.insertStart(3);
+    it('should return true if found', () => {
+      expect(dlList.search(2)).toBe(true);
+    });
+    it('should return false if not found', () => {
+      expect(dlList.search(4)).toBe(false);
+    });
   });
 });
