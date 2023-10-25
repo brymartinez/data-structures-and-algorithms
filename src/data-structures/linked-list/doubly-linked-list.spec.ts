@@ -110,5 +110,11 @@ describe('DoublyLinkedList', () => {
       expect(dlnode1.next).toStrictEqual(null);
       expect(dlnode1.prev).toStrictEqual(dlnode3);
     });
+    it('should delete only node', () => {
+      dlList.delete(dlnode3);
+      dlList.delete(dlnode2);
+      dlList.delete(dlnode1);
+      expect(dlList.display()).toStrictEqual([]);
+    });
   });
 });

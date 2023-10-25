@@ -68,10 +68,15 @@ export class DoublyLinkedList<T = any> extends LinkedList<T> {
   }
 
   public override delete(node: DoublyLinkedListNode) {
-    if (node.prev === null) {
+    if (this.head === node) {
       // first node
-      node.next.prev = null;
-      this.head = node.next;
+      if (this.head.next !== null) {
+        node.next.prev = null;
+        this.head = node.next;
+      } else {
+        // only node
+        this.head = null;
+      }
     } else if (node.next && node.prev) {
       node.prev.next = node.next;
       node.next.prev = node.prev;
