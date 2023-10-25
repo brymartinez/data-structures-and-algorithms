@@ -12,20 +12,7 @@ export class DoublyLinkedList<T = any> extends LinkedList<T> {
     this.head = head;
   }
 
-  display(): T[] {
-    const result = [];
-
-    let node = this.head;
-
-    while (node) {
-      result.push(node.data);
-      node = node.next;
-    }
-
-    return result;
-  }
-
-  insertStart(data: T): DoublyLinkedListNode<T> {
+  public override insertStart(data: T): DoublyLinkedListNode<T> {
     const node = new DoublyLinkedListNode(data);
     node.next = this.head;
     node.prev = null;
@@ -38,7 +25,7 @@ export class DoublyLinkedList<T = any> extends LinkedList<T> {
     return node;
   }
 
-  insertAfter(
+  public override insertAfter(
     prevNode: DoublyLinkedListNode<T>,
     data: T,
   ): DoublyLinkedListNode<T> {
@@ -59,7 +46,7 @@ export class DoublyLinkedList<T = any> extends LinkedList<T> {
     return node;
   }
 
-  insertEnd(data: T): DoublyLinkedListNode<T> {
+  public override insertEnd(data: T): DoublyLinkedListNode<T> {
     const node = new DoublyLinkedListNode(data);
 
     if (this.head === null) {
@@ -80,7 +67,7 @@ export class DoublyLinkedList<T = any> extends LinkedList<T> {
     return node;
   }
 
-  delete(node: DoublyLinkedListNode) {
+  public override delete(node: DoublyLinkedListNode) {
     if (node.prev === null) {
       // first node
       node.next.prev = null;
@@ -91,42 +78,6 @@ export class DoublyLinkedList<T = any> extends LinkedList<T> {
     } else if (node.next === null) {
       // last node
       node.prev.next = null;
-    }
-  }
-
-  search(element: T): boolean {
-    let currentNode = this.head;
-
-    while (currentNode) {
-      if (currentNode.data === element) {
-        return true;
-      }
-      currentNode = currentNode.next;
-    }
-
-    return false;
-  }
-
-  sort() {
-    let currentNode = this.head;
-    let index = null;
-    let temp: T;
-
-    if (this.head === null) {
-      return;
-    } else {
-      while (currentNode !== null) {
-        index = currentNode.next;
-        while (index !== null) {
-          if (currentNode.data > index.data) {
-            temp = currentNode.data;
-            currentNode.data = index.data;
-            index.data = temp;
-          }
-          index = index.next;
-        }
-        currentNode = currentNode.next;
-      }
     }
   }
 }

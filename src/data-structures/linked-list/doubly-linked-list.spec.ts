@@ -111,30 +111,4 @@ describe('DoublyLinkedList', () => {
       expect(dlnode1.prev).toStrictEqual(dlnode3);
     });
   });
-  describe('sort', () => {
-    it('should sort in ascending order', () => {
-      const dlList = new DoublyLinkedList();
-      dlList.insertStart(1);
-      dlList.insertStart(2);
-      dlList.insertStart(3);
-      dlList.sort();
-      expect(dlList.display()).toStrictEqual([1, 2, 3]);
-    });
-    it('should not throw on empty list', () => {
-      const dlList = new DoublyLinkedList();
-      expect(() => dlList.sort()).not.toThrow();
-    });
-  });
-  describe('search', () => {
-    const dlList = new DoublyLinkedList();
-    dlList.insertStart(1);
-    dlList.insertStart(2);
-    dlList.insertStart(3);
-    it('should return true if found', () => {
-      expect(dlList.search(2)).toBe(true);
-    });
-    it('should return false if not found', () => {
-      expect(dlList.search(4)).toBe(false);
-    });
-  });
 });
