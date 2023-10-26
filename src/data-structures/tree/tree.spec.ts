@@ -10,7 +10,8 @@ describe('Tree', () => {
       tree.root.left.left = new TreeNode(5);
       tree.root.left.right = new TreeNode(6);
 
-      expect(tree.inorder(tree.root)).toBeTruthy();
+      // expect(tree.inorder(tree.root)).toBeTruthy();
+      expect(tree.postorder(tree.root)).toBeTruthy();
     });
   });
 });
