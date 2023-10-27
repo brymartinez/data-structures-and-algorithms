@@ -94,7 +94,6 @@ describe('LinkedList', () => {
       expect(list.length).toStrictEqual(6);
     });
   });
-
   describe('remove', () => {
     it('should remove', () => {
       const list = new LinkedList();
