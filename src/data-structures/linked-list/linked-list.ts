@@ -8,21 +8,146 @@ export class LinkedListNode<T = any> {
 
 export class LinkedList<T = any> {
   head: LinkedListNode<T>;
-  constructor(head: LinkedListNode<T> = null) {
-    this.head = head;
+  tail: LinkedListNode<T>;
+  length: number;
+  constructor() {
+    this.head = null;
+    this.tail = null;
+    this.length = 0;
   }
 
-  public display() {
-    const result = [];
-
-    let node = this.head;
-
-    while (node) {
-      result.push(node.data);
-      node = node.next;
+  public push(val: T): LinkedListNode<T> {
+    const node = new LinkedListNode(val);
+    if (!this.head) {
+      this.head = node;
+    } else {
+      this.tail.next = node;
     }
 
-    return result;
+    this.tail = node;
+    this.length++;
+    return node;
+  }
+
+  public pop(): LinkedListNode<T> {
+    if (!this.head) return undefined;
+
+    let currentNode = this.head;
+    let newTailNode = this.tail;
+
+    while (currentNode.next) {
+      newTailNode = currentNode;
+      currentNode = currentNode.next;
+    }
+
+    this.tail = newTailNode;
+    this.tail.next = null;
+    this.length--;
+
+    if (this.length === 0) {
+      // last element popped, reset list
+      this.head = null;
+    }
+    return currentNode;
+  }
+
+  public shift(): LinkedListNode<T> {
+    if (!this.head) return undefined;
+
+    const returnedHead = this.head;
+
+    this.head = this.head.next;
+
+    this.length--;
+    if (this.length === 0) {
+      // last element shifted, reset list
+      this.tail = null;
+      this.head = null;
+    }
+    return returnedHead;
+  }
+
+  public unshift(val: T): LinkedListNode<T> {
+    const node = new LinkedListNode(val);
+
+    if (!this.head) {
+      this.head = node;
+      this.tail = node;
+    } else {
+      const oldHead = this.head;
+      this.head = node;
+      this.head.next = oldHead;
+    }
+
+    this.length++;
+
+    return this.head;
+  }
+
+  public get(position: number): LinkedListNode<T> {
+    let currentNode = this.head;
+    let i = 0;
+    if (position < 0 || position >= this.length) return null;
+    while (i !== position) {
+      currentNode = currentNode.next;
+      i++;
+    }
+
+    return currentNode;
+  }
+
+  public set(position: number, val: T): boolean {
+    const node = this.get(position);
+    if (!node) return false;
+    node.data = val;
+    return true;
+  }
+
+  public insert(position: number, val: T) {
+    if (position === 0) return !!this.unshift(val);
+    else if (position === this.length - 1) return !!this.push(val);
+    else {
+      const prevNode = this.get(position - 1);
+      if (!prevNode) return false;
+      const nextNode = prevNode.next;
+      const newNode = new LinkedListNode(val);
+      prevNode.next = newNode;
+      newNode.next = nextNode;
+    }
+
+    this.length++;
+    return true;
+  }
+
+  public remove(position: number) {
+    if (position === 0) return this.shift();
+    else if (position === this.length - 1) return this.pop();
+    else {
+      const prevNode = this.get(position - 1);
+      if (!prevNode) return false;
+      const thisNode = this.get(position);
+      prevNode.next = thisNode.next;
+      this.length--;
+      return thisNode;
+    }
+  }
+
+  public reverse() {
+    let node = this.head;
+    this.head = this.tail;
+    this.tail = node;
+
+    let next;
+    let prev = null;
+
+    while (node !== null) {
+      next = node.next;
+      node.next = prev;
+      prev = node;
+      node = next;
+    }
+
+    return this;
   }
 
   public sort() {
@@ -48,78 +173,16 @@ export class LinkedList<T = any> {
     }
   }
 
-  public insertStart(data: T): LinkedListNode<T> {
-    const node = new LinkedListNode(data);
+  public display() {
+    const result = [];
 
-    if (this.head !== null) {
-      node.next = this.head;
+    let node = this.head;
+
+    while (node) {
+      result.push(node.data);
+      node = node.next;
     }
 
-    this.head = node;
-    return node;
-  }
-
-  public insertAfter(prevNode: LinkedListNode<T>, data: T): LinkedListNode<T> {
-    if (!prevNode) {
-      throw new Error('Previous node cannot be null.');
-    }
-
-    const node = new LinkedListNode(data);
-
-    node.next = prevNode.next;
-    prevNode.next = node;
-
-    return node;
-  }
-
-  public insertEnd(data: T): LinkedListNode<T> {
-    const node = new LinkedListNode(data);
-
-    if (this.head === null) {
-      this.head = node;
-      return this.head;
-    }
-
-    node.next = null;
-
-    let finalNode = this.head;
-
-    while (finalNode.next !== null) {
-      finalNode = finalNode.next;
-    }
-
-    finalNode.next = node;
-    return node;
-  }
-
-  public delete(node: LinkedListNode<T>) {
-    // Look for the previous node
-    let temp = this.head;
-
-    if (this.head === node) {
-      // last node
-      this.head = null;
-    }
-
-    let previousNode: LinkedListNode<T> = null;
-    while (temp.data !== node.data) {
-      previousNode = temp;
-      temp = temp.next;
-    }
-
-    if (previousNode !== null) previousNode.next = node.next;
-  }
-
-  public search(element: T): boolean {
-    let currentNode = this.head;
-
-    while (currentNode) {
-      if (currentNode.data === element) {
-        return true;
-      }
-      currentNode = currentNode.next;
-    }
-
-    return false;
+    return result;
   }
 }
