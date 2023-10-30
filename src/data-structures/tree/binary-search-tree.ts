@@ -1,4 +1,4 @@
-export class BSTNode<T> {
+export class BSTNode<T = any> {
   left: BSTNode<T> = null;
   right: BSTNode<T> = null;
   value: T;
@@ -8,7 +8,7 @@ export class BSTNode<T> {
   }
 }
 
-export class BinarySearchTree<T> {
+export class BinarySearchTree<T = any> {
   root: BSTNode<T> = null;
   constructor() {}
 
@@ -27,9 +27,7 @@ export class BinarySearchTree<T> {
           currentNode.right = newNode;
         }
         currentNode = currentNode.right;
-      } else if (currentNode.value === value) {
-        throw new Error('Value already exists in the tree.');
-      } else {
+      } else if (currentNode.value > value) {
         if (!currentNode.left) {
           currentNode.left = newNode;
         }
@@ -58,5 +56,26 @@ export class BinarySearchTree<T> {
         currentNode = currentNode.left;
       }
     }
+  }
+
+  public bfs() {
+    const q = [];
+    const visitedNodes = [];
+    q.push(this.root);
+
+    while (q.length) {
+      const node = q.shift();
+      visitedNodes.push(node);
+
+      if (node.left) {
+        q.push(node.left);
+      }
+
+      if (node.right) {
+        q.push(node.right);
+      }
+    }
+
+    return visitedNodes;
   }
 }

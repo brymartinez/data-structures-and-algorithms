@@ -1,12 +1,4 @@
 import { Heap } from './data-structures/heap/heap';
-import {
-  DoublyLinkedList,
-  DoublyLinkedListNode,
-} from './data-structures/linked-list/doubly-linked-list';
-import {
-  LinkedListNode,
-  LinkedList,
-} from './data-structures/linked-list/linked-list';
 import { Queue } from './data-structures/queue/queue';
 import { Stack } from './data-structures/stack/stack';
 
@@ -54,49 +46,7 @@ import { Stack } from './data-structures/stack/stack';
   heap.insert(7);
 })();
 
-(async () => {
-  // Linked List example
+// (async () => {
+//   const arr: number[] = [];
 
-  const node1 = new LinkedListNode(1);
-  const node2 = new LinkedListNode(2);
-  const node3 = new LinkedListNode(3);
-
-  node1.next = node2;
-  node2.next = node3;
-
-  const linkedList = new LinkedList(node1);
-  console.log(linkedList.head.next.data); // 2
-  const node4 = new LinkedListNode(4);
-
-  node3.next = node4;
-
-  console.log(linkedList.head.next.next.next.data); // 4
-
-  const dllnode1 = new DoublyLinkedListNode(1);
-  const dllnode2 = new DoublyLinkedListNode(2);
-  const dllnode3 = new DoublyLinkedListNode(3);
-
-  dllnode1.next = dllnode2;
-  dllnode2.prev = dllnode1;
-  dllnode2.next = dllnode3;
-  dllnode3.next = null;
-
-  const dlList = new DoublyLinkedList(dllnode1);
-  console.log(dlList.head.next.prev.data); // 1
-
-  const dllnode0 = dlList.insertStart(0);
-  console.log(dlList.head.data); // 0
-  console.log(dlList.head.next.data); // 1
-  console.log(dlList.head.prev); // null
-
-  const dllnode4 = dlList.insertEnd(4);
-  console.log(dlList.display());
-  const dllnode25 = dlList.insertAfter(dllnode2, 2.5);
-  console.log(dlList.display());
-  dlList.delete(dllnode0);
-  console.log(dlList.display());
-  dlList.delete(dllnode4);
-  console.log(dlList.display());
-  dlList.delete(dllnode25);
-  console.log(dlList.display());
-})();
+// })();
