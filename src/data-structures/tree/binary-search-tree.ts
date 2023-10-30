@@ -65,7 +65,7 @@ export class BinarySearchTree<T = any> {
 
     while (q.length) {
       const node = q.shift();
-      visitedNodes.push(node);
+      visitedNodes.push(node.value);
 
       if (node.left) {
         q.push(node.left);
@@ -75,6 +75,66 @@ export class BinarySearchTree<T = any> {
         q.push(node.right);
       }
     }
+
+    return visitedNodes;
+  }
+
+  public preOrder() {
+    const visitedNodes = [];
+
+    const traverse = (node: BSTNode) => {
+      visitedNodes.push(node.value);
+
+      if (node.left) {
+        traverse(node.left);
+      }
+
+      if (node.right) {
+        traverse(node.right);
+      }
+    };
+
+    traverse(this.root);
+
+    return visitedNodes;
+  }
+
+  public postOrder() {
+    const visitedNodes = [];
+
+    const traverse = (node: BSTNode) => {
+      if (node.left) {
+        traverse(node.left);
+      }
+
+      if (node.right) {
+        traverse(node.right);
+      }
+
+      visitedNodes.push(node.value);
+    };
+
+    traverse(this.root);
+
+    return visitedNodes;
+  }
+
+  public inOrder() {
+    const visitedNodes = [];
+
+    const traverse = (node: BSTNode) => {
+      if (node.left) {
+        traverse(node.left);
+      }
+
+      visitedNodes.push(node.value);
+
+      if (node.right) {
+        traverse(node.right);
+      }
+    };
+
+    traverse(this.root);
 
     return visitedNodes;
   }

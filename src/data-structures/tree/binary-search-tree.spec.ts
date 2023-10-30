@@ -1,6 +1,16 @@
 import { BinarySearchTree } from './binary-search-tree';
 
 describe('BinarySearchTree', () => {
+  let TREE: BinarySearchTree;
+  beforeAll(() => {
+    TREE = new BinarySearchTree();
+    TREE.insert(10);
+    TREE.insert(6);
+    TREE.insert(3);
+    TREE.insert(8);
+    TREE.insert(15);
+    TREE.insert(20);
+  });
   describe('insert', () => {
     it('should insert', () => {
       const tree = new BinarySearchTree();
@@ -42,15 +52,24 @@ describe('BinarySearchTree', () => {
   });
   describe('bfs', () => {
     it('should do bfs', () => {
-      const tree = new BinarySearchTree();
-      tree.insert(10);
-      tree.insert(6);
-      tree.insert(3);
-      tree.insert(8);
-      tree.insert(15);
-      tree.insert(20);
-
-      expect(() => tree.bfs()).not.toThrow();
+      expect(TREE.bfs()).toStrictEqual([10, 6, 15, 3, 8, 20]);
+    });
+  });
+  describe('dfs', () => {
+    describe('preOrder', () => {
+      it('should do preOrder', () => {
+        expect(TREE.preOrder()).toStrictEqual([10, 6, 3, 8, 15, 20]);
+      });
+    });
+    describe('postOrder', () => {
+      it('should do postOrder', () => {
+        expect(TREE.postOrder()).toStrictEqual([3, 8, 6, 20, 15, 10]);
+      });
+    });
+    describe('inOrder', () => {
+      it('should do inOrder', () => {
+        expect(TREE.inOrder()).toStrictEqual([3, 6, 8, 10, 15, 20]);
+      });
     });
   });
 });
