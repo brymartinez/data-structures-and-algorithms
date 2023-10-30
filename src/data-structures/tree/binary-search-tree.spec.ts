@@ -20,6 +20,25 @@ describe('BinarySearchTree', () => {
 
       expect(() => tree.insert(13)).not.toThrow();
       expect(tree.root.right.left.value).toStrictEqual(13);
+      expect(() => tree.insert(13)).toThrow();
+    });
+  });
+  describe('find', () => {
+    it('should find', () => {
+      const tree = new BinarySearchTree();
+      expect(tree.find(10)?.value).toStrictEqual(undefined);
+
+      tree.insert(10);
+      tree.insert(6);
+      tree.insert(3);
+      tree.insert(8);
+      tree.insert(15);
+      tree.insert(20);
+
+      expect(tree.find(10)?.value).toStrictEqual(10);
+      expect(tree.find(20)?.value).toStrictEqual(20);
+      expect(tree.find(3)?.value).toStrictEqual(3);
+      expect(tree.find(13)?.value).toStrictEqual(undefined);
     });
   });
 });

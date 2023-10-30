@@ -41,28 +41,22 @@ export class BinarySearchTree<T> {
 
   public find(value: T) {
     let currentNode = this.root;
-    const newNode = new BSTNode(value);
 
-    if (currentNode === null) {
-      this.root = newNode;
-      return this.root;
+    if (!currentNode) {
+      return null;
     }
 
-    while (currentNode.value !== value) {
-      if (currentNode.value < value) {
-        if (!currentNode.right) {
-          currentNode.right = newNode;
-        }
-        currentNode = currentNode.right;
+    while (true) {
+      if (!currentNode) {
+        return null;
       } else if (currentNode.value === value) {
-        throw new Error('Value already exists in the tree.');
-      } else {
-        if (!currentNode.left) {
-          currentNode.left = newNode;
-        }
+        return currentNode;
+      } else if (currentNode.value < value) {
+        // right
+        currentNode = currentNode.right; // may be null
+      } else if (currentNode.value > value) {
         currentNode = currentNode.left;
       }
     }
-    return currentNode;
   }
 }
