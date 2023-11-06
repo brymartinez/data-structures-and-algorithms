@@ -1,17 +1,16 @@
 package stack
 
-type Stack []string
+type Stack []int
 
-func (stack *Stack) Push(s string) {
+func (stack *Stack) Push(s int) {
 	*stack = append(*stack, s)
 }
 
-func (stack *Stack) Pop() (string, bool) {
-
+func (stack *Stack) Pop() (int, bool) {
 	lastElement := len(*stack) - 1
 
 	if lastElement == -1 {
-		return "", false
+		return 0, false
 	}
 
 	last := (*stack)[lastElement]
