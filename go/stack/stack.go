@@ -3,10 +3,19 @@ package stack
 type Stack []string
 
 func (stack *Stack) Push(s string) {
-	return append(*stack, s)
+	*stack = append(*stack, s)
 }
 
-func (stack *Stack) Pop() {
-	n := len(*stack)
-	return *stack[:n] // Pop
+func (stack *Stack) Pop() (string, bool) {
+
+	lastElement := len(*stack) - 1
+
+	if lastElement == -1 {
+		return "", false
+	}
+
+	last := (*stack)[lastElement]
+	val := (*stack)[:lastElement]
+	*stack = val
+	return last, true
 }

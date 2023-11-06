@@ -1,8 +1,21 @@
 package main
 
-import "github.com/brymartinez/dsa-tutorial/go/stack"
+import (
+	"dsa-tutorial/stack"
+	"fmt"
+)
 
 func main() {
-	stack.Create()
+	var stack stack.Stack
 	// Stack
+	stack.Push("a")
+	stack.Push("b")
+	stack.Push("c")
+	stack.Push("d")
+	fmt.Println(stack.Pop())
+	fmt.Println(stack.Pop())
+	fmt.Println(stack.Pop())
+	fmt.Println(stack.Pop())
+	fmt.Println(stack.Pop())
+	fmt.Println(stack)
 }
