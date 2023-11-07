@@ -78,4 +78,7 @@ func main() {
 	// list is now [1 4 3]
 	list.Reverse()
 	fmt.Println(list.Head.Data == 3) // should be true
+	list.Sort()
+	fmt.Println(list.Display()) // should be 134
+
 }

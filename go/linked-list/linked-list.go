@@ -178,5 +178,39 @@ func (list *LinkedList) Reverse() *LinkedList {
 	}
 
 	return list
+}
 
+func (list *LinkedList) Sort() {
+	currentNode := list.Head
+	var index *LinkedListNode
+	var temp int
+
+	if list.Head == nil {
+		return
+	} else {
+		for currentNode != nil {
+			index = currentNode.Next
+			for index != nil {
+				if currentNode.Data > index.Data {
+					temp = currentNode.Data
+					currentNode.Data = index.Data
+					index.Data = temp
+				}
+				index = index.Next
+			}
+			currentNode = currentNode.Next
+		}
+	}
+}
+
+func (list *LinkedList) Display() []int {
+	var result []int
+	node := list.Head
+
+	for node != nil {
+		result = append(result, node.Data)
+		node = node.Next
+	}
+
+	return result
 }
