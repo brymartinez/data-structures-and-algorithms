@@ -69,3 +69,20 @@ func (list *LinkedList) Shift() (*LinkedListNode, error) {
 
 	return returnedHead, nil
 }
+
+func (list *LinkedList) Unshift(element int) (*LinkedListNode, error) {
+	node := LinkedListNode{Data: element}
+
+	if list.Head == nil {
+		list.Head = &node
+		list.Tail = &node
+	} else {
+		oldHead := list.Head
+		list.Head = &node
+		list.Head.Next = oldHead
+	}
+
+	list.Length++
+
+	return list.Head, nil
+}

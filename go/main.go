@@ -65,4 +65,7 @@ func main() {
 	list.Shift()
 
 	fmt.Println(list.Head.Data == 2) // should be true
+	list.Push(3)
+	list.Unshift(1)
+	fmt.Println(list.Head.Data == 1)
 }
