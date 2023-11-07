@@ -75,4 +75,7 @@ func main() {
 	fmt.Println(list.Head.Next.Data == 2) // should be true
 	list.Remove(1)
 	fmt.Println(list.Head.Next.Data == 4) // should be true
+	// list is now [1 4 3]
+	list.Reverse()
+	fmt.Println(list.Head.Data == 3) // should be true
 }

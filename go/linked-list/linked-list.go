@@ -161,3 +161,22 @@ func (list *LinkedList) Remove(position int) *LinkedListNode {
 		return thisNode
 	}
 }
+
+func (list *LinkedList) Reverse() *LinkedList {
+	node := list.Head
+	list.Head = list.Tail
+	list.Tail = node
+
+	var next *LinkedListNode
+	var prev *LinkedListNode = nil
+
+	for node != nil {
+		next = node.Next
+		node.Next = prev
+		prev = node
+		node = next
+	}
+
+	return list
+
+}
