@@ -73,4 +73,6 @@ func main() {
 	fmt.Println(list.Get(1).Data == 4) // should be true
 	list.Insert(1, 2)
 	fmt.Println(list.Head.Next.Data == 2) // should be true
+	list.Remove(1)
+	fmt.Println(list.Head.Next.Data == 4) // should be true
 }

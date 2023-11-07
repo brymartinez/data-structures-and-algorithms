@@ -134,3 +134,30 @@ func (list *LinkedList) Insert(position int, element int) bool {
 	list.Length++
 	return true
 }
+
+func (list *LinkedList) Remove(position int) *LinkedListNode {
+	if position == 0 {
+		node, err := list.Shift()
+		if err != nil {
+			return node
+		} else {
+			return nil
+		}
+	} else if position == list.Length-1 {
+		node, err := list.Pop()
+		if err != nil {
+			return node
+		} else {
+			return nil
+		}
+	} else {
+		prevNode := list.Get(position - 1)
+		if prevNode == nil {
+			return nil
+		}
+		thisNode := list.Get(position)
+		prevNode.Next = thisNode.Next
+		list.Length--
+		return thisNode
+	}
+}
