@@ -1,7 +1,6 @@
 package main
 
 import (
-	"dsa-tutorial/queue"
 	"dsa-tutorial/stack"
 	"fmt"
 )
@@ -20,9 +19,7 @@ func main() {
 	fmt.Println(stack.Pop())
 	fmt.Println(stack)
 
-	var queue queue.Queue
-
-	q := queue.Create(4)
+	queue := Queue{Size: 3}
 	q.Enqueue(1)
 
 	fmt.Println(q)

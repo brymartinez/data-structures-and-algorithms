@@ -1,17 +1,15 @@
 package queue
 
-type Queue []int
-
-func (queue Queue) Create(size int) Queue {
-	q := make([]int, size)
-	return q
+type Queue struct {
+	Size     int
+	Elements []int
 }
 
 func (queue *Queue) Enqueue(element int) {
-	*queue = append(*queue, element)
+	queue = append(queue.Elements, element)
 }
 
 func (queue *Queue) Dequeue() {
-	lastElement := len(*queue) - 1
-	*queue = (*queue)[:lastElement]
+	lastElement := queue.Size - 1
+	*queue = *queue.Elements[:lastElement]
 }
