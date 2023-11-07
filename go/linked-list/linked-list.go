@@ -50,3 +50,22 @@ func (list *LinkedList) Pop() (*LinkedListNode, error) {
 
 	return currentNode, nil
 }
+
+func (list *LinkedList) Shift() (*LinkedListNode, error) {
+	if list.Head == nil {
+		return nil, errors.New("linked list is empty")
+	}
+
+	returnedHead := list.Head
+
+	list.Head = list.Head.Next
+
+	list.Length--
+
+	if list.Length == 0 {
+		list.Tail = nil
+		list.Head = nil
+	}
+
+	return returnedHead, nil
+}

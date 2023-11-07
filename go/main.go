@@ -54,8 +54,15 @@ func main() {
 		fmt.Println(err)
 	}
 	list.Pop()
-	node, err = list.Pop()
+	_, err = list.Pop()
 	if err != nil {
 		fmt.Println(err)
 	}
+
+	list.Push(1)
+	list.Push(2)
+
+	list.Shift()
+
+	fmt.Println(list.Head.Data == 2) // should be true
 }
