@@ -68,4 +68,5 @@ func main() {
 	list.Push(3)
 	list.Unshift(1)
 	fmt.Println(list.Head.Data == 1)
+	fmt.Println(list.Get(1).Data) // should be 2
 }

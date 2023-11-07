@@ -86,3 +86,18 @@ func (list *LinkedList) Unshift(element int) (*LinkedListNode, error) {
 
 	return list.Head, nil
 }
+
+func (list *LinkedList) Get(position int) *LinkedListNode {
+	currentNode, i := list.Head, 0
+
+	if position < 0 || position >= list.Length {
+		return nil
+	}
+
+	for i != position {
+		currentNode = currentNode.Next
+		i++
+	}
+
+	return currentNode
+}
