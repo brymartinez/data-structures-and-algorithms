@@ -38,5 +38,24 @@ func main() {
 	// }
 
 	// fmt.Println(queue.Elements)
-	fmt.Println(linkedlist.LinkedList{})
+	list := linkedlist.LinkedList{}
+
+	fmt.Println(list)
+
+	list.Push(1)
+
+	list.Push(2)
+
+	fmt.Println(list.Head.Next.Data == 2) // should be true
+	node, err := list.Pop()
+	if err == nil {
+		fmt.Println(node.Data == 2) // should be true
+	} else {
+		fmt.Println(err)
+	}
+	list.Pop()
+	node, err = list.Pop()
+	if err != nil {
+		fmt.Println(err)
+	}
 }
