@@ -101,3 +101,36 @@ func (list *LinkedList) Get(position int) *LinkedListNode {
 
 	return currentNode
 }
+
+func (list *LinkedList) Set(position int, element int) bool {
+	node := list.Get(position)
+
+	if node == nil {
+		return false
+	} else {
+		node.Data = element
+		return true
+	}
+}
+
+func (list *LinkedList) Insert(position int, element int) bool {
+	if position == 0 {
+		_, err := list.Unshift(element)
+		return err == nil
+	} else if position == list.Length-1 {
+		list.Push(element)
+		return true
+	} else {
+		prevNode := list.Get(position - 1)
+		if prevNode == nil {
+			return false
+		}
+		nextNode, newNode := prevNode.Next, LinkedListNode{Data: element}
+
+		prevNode.Next = &newNode
+		newNode.Next = nextNode
+	}
+
+	list.Length++
+	return true
+}
