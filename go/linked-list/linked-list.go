@@ -13,7 +13,7 @@ type LinkedList struct {
 	Length int
 }
 
-func (list *LinkedList) Push(element int) LinkedListNode {
+func (list *LinkedList) Push(element int) *LinkedListNode {
 	node := LinkedListNode{Data: element}
 
 	if list.Head == nil {
@@ -24,7 +24,7 @@ func (list *LinkedList) Push(element int) LinkedListNode {
 
 	list.Tail = &node
 	list.Length++
-	return node
+	return &node
 }
 
 func (list *LinkedList) Pop() (*LinkedListNode, error) {

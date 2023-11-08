@@ -36,7 +36,7 @@ export class DoublyLinkedList<T = any> extends LinkedList<T> {
     const lastNode = this.tail;
 
     this.tail = lastNode.prev;
-    lastNode.next = null;
+    this.tail.next = null;
     this.length--;
     if (this.length === 0) {
       // last element popped, reset list
