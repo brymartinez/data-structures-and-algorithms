@@ -112,7 +112,7 @@ export class DoublyLinkedList<T = any> extends LinkedList<T> {
 
   public override insert(position: number, val: T) {
     if (position === 0) return !!this.unshift(val);
-    else if (position === this.length - 1) return !!this.push(val);
+    else if (position === this.length) return !!this.push(val);
     else {
       const prevNode = this.get(position - 1);
       if (!prevNode) return false;

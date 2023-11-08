@@ -126,3 +126,24 @@ func (list *DoublyLinkedList) Set(position int, element int) bool {
 		return true
 	}
 }
+
+func (list *DoublyLinkedList) Insert(position int, element int) bool {
+	if position == 0 {
+		return list.Unshift(element) != nil
+	} else if position == list.Length {
+		return list.Push(element) != nil
+	} else {
+		prevNode := list.Get(position - 1)
+		if prevNode == nil {
+			return false
+		}
+		nextNode := prevNode.Next
+		newNode := &DoublyLinkedListNode{Data: element}
+		prevNode.Next = newNode
+		newNode.Next = nextNode
+		newNode.Prev = prevNode
+	}
+
+	list.Length++
+	return true
+}

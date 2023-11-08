@@ -97,7 +97,10 @@ func main() {
 	dll.Push(3)
 	dll.Push(4)
 	dll.Push(5)
-	fmt.Println(dll.Get(2).Data)
+	fmt.Println(dll.Get(2).Data == 3)
 	dll.Set(4, 6)
 	fmt.Println(dll.Head.Next.Next.Next.Next.Data == 6)
+	dll.Insert(4, 5)
+	fmt.Println(dll.Head.Next.Next.Next.Next.Data == 5)
+
 }
