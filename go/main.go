@@ -98,4 +98,6 @@ func main() {
 	dll.Push(4)
 	dll.Push(5)
 	fmt.Println(dll.Get(2).Data)
+	dll.Set(4, 6)
+	fmt.Println(dll.Head.Next.Next.Next.Next.Data == 6)
 }

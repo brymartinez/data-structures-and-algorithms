@@ -115,3 +115,14 @@ func (list *DoublyLinkedList) Get(position int) *DoublyLinkedListNode {
 
 	return currentNode
 }
+
+func (list *DoublyLinkedList) Set(position int, element int) bool {
+	node := list.Get(position)
+
+	if node == nil {
+		return false
+	} else {
+		node.Data = element
+		return true
+	}
+}
