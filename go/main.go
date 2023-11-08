@@ -94,4 +94,8 @@ func main() {
 	fmt.Println(dll.Head.Data == 2)
 	dll.Unshift(1)
 	fmt.Println(dll.Head.Data == 1)
+	dll.Push(3)
+	dll.Push(4)
+	dll.Push(5)
+	fmt.Println(dll.Get(2).Data)
 }

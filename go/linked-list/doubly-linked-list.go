@@ -83,3 +83,35 @@ func (list *DoublyLinkedList) Unshift(element int) *DoublyLinkedListNode {
 
 	return list.Head
 }
+
+func (list *DoublyLinkedList) Get(position int) *DoublyLinkedListNode {
+	if position < 0 || position >= list.Length {
+		return nil
+	}
+
+	halfLength := list.Length / 2
+
+	var i int
+	var currentNode *DoublyLinkedListNode
+
+	if halfLength > position {
+		// use next
+		i = 0
+		currentNode = list.Head
+		i++
+
+		for i != position {
+			currentNode = currentNode.Next
+			i++
+		}
+	} else {
+		i = list.Length - 1
+		currentNode = list.Tail
+		for i != position {
+			currentNode = currentNode.Prev
+			i--
+		}
+	}
+
+	return currentNode
+}
