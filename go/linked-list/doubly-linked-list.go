@@ -44,3 +44,42 @@ func (list *DoublyLinkedList) Pop() (*DoublyLinkedListNode, error) {
 
 	return lastNode, nil
 }
+
+func (list *DoublyLinkedList) Shift() (*DoublyLinkedListNode, error) {
+	if list.Head == nil {
+		return nil, errors.New("list is empty")
+	}
+
+	firstNode := list.Head
+	newHead := list.Head.Next
+
+	list.Length--
+
+	if list.Length == 0 {
+		list.Tail = nil
+		list.Head = nil
+	} else {
+		newHead.Prev = nil
+		list.Head = newHead
+	}
+
+	return firstNode, nil
+}
+
+func (list *DoublyLinkedList) Unshift(element int) *DoublyLinkedListNode {
+	node := &DoublyLinkedListNode{Data: element}
+
+	if list.Head == nil {
+		list.Head = node
+		list.Tail = node
+	} else {
+		oldHead := list.Head
+		oldHead.Prev = node
+		list.Head = node
+		list.Head.Next = oldHead
+	}
+
+	list.Length++
+
+	return list.Head
+}

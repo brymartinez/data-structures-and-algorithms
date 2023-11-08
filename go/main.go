@@ -90,5 +90,8 @@ func main() {
 	dll.Pop()
 	fmt.Println(dll.Head.Next.Data == 2)
 	fmt.Println(dll.Head.Next.Next == nil)
-
+	dll.Shift()
+	fmt.Println(dll.Head.Data == 2)
+	dll.Unshift(1)
+	fmt.Println(dll.Head.Data == 1)
 }
