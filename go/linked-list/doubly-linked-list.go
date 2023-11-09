@@ -147,3 +147,36 @@ func (list *DoublyLinkedList) Insert(position int, element int) bool {
 	list.Length++
 	return true
 }
+
+func (list *DoublyLinkedList) Remove(position int) *DoublyLinkedListNode {
+	if position == 0 {
+		node, _ := list.Shift()
+		return node
+	} else if position == list.Length-1 {
+		node, _ := list.Pop()
+		return node
+	} else {
+		removedNode := list.Get(position)
+
+		if removedNode == nil {
+			return nil
+		}
+
+		removedNode.Prev.Next = removedNode.Next
+		removedNode.Next.Prev = removedNode.Prev
+		list.Length--
+		return removedNode
+	}
+}
+
+func (list *DoublyLinkedList) Display() []int {
+	var result []int
+	node := list.Head
+
+	for node != nil {
+		result = append(result, node.Data)
+		node = node.Next
+	}
+
+	return result
+}

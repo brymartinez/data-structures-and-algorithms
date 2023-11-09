@@ -102,5 +102,9 @@ func main() {
 	fmt.Println(dll.Head.Next.Next.Next.Next.Data == 6)
 	dll.Insert(4, 5)
 	fmt.Println(dll.Head.Next.Next.Next.Next.Data == 5)
+	fmt.Println(dll.Display())
+	dll.Remove(5)
+	fmt.Println(dll.Head.Next.Next.Next.Next == nil)
+	fmt.Println(dll.Display())
 
 }
