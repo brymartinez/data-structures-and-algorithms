@@ -157,4 +157,43 @@ func TestInsert(t *testing.T) {
 	if list.Tail.Data != 4 || list.Tail.Prev.Next.Data != 4 {
 		t.Fatalf("Insert(3, 4) failed. Tail misconfigured. Node: %v", list.Tail)
 	}
+
+	node := list.Insert(28, 28)
+
+	if node != false {
+		t.Fatalf("Insert(28, 28) failed. Did not return false. Node: %v", node)
+	}
+}
+
+func TestRemove(t *testing.T) {
+	list := DoublyLinkedList{}
+	list.Push(1)
+	list.Push(2)
+	list.Push(3)
+	list.Push(4)
+	list.Push(5)
+
+	node := list.Remove(0)
+
+	if node.Data != 1 || list.Head.Data != 2 || list.Head.Prev != nil {
+		t.Fatalf("Remove(0) failed. Head misconfigured. Head: %v", list.Head)
+	}
+
+	node = list.Remove(3)
+
+	if node.Data != 5 || list.Tail.Data != 4 || list.Tail.Next != nil {
+		t.Fatalf("Remove(3) failed. Tail misconfigured. Tail: %v", list.Tail)
+	}
+
+	node = list.Remove(1)
+
+	if node.Data != 3 || list.Head.Next.Data != 4 || list.Tail.Prev.Data != 2 {
+		t.Fatalf("Remove(1) failed. Head/Tail misconfigured. Head: %v, Tail: %v", list.Head, list.Tail)
+	}
+
+	node = list.Remove(28)
+
+	if node != nil {
+		t.Fatalf("Remove(28) failed. Did not return nil. Node: %v", node)
+	}
 }
