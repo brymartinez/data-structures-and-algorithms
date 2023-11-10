@@ -35,7 +35,11 @@ func (list *DoublyLinkedList) Pop() (*DoublyLinkedListNode, error) {
 	lastNode := list.Tail
 
 	list.Tail = lastNode.Prev
-	list.Tail.Next = nil
+
+	if list.Tail != nil {
+		list.Tail.Next = nil
+	}
+
 	list.Length--
 
 	if list.Length == 0 {

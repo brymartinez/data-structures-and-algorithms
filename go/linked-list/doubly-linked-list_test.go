@@ -45,9 +45,9 @@ func TestPop(t *testing.T) {
 		t.Fatalf("Pop() failed, wrong head. Head: %v, Node: %v", list.Head, poppedNode)
 	}
 
-	// secondNode := list.Push(2)
+	poppedNode, err = list.Pop()
 
-	// if list.Head.Next.Data != 2 || secondNode.Prev.Data != 1 {
-	// 	t.Fatalf("Push(2) failed. First Node: %v, 2nd node: %v", list.Head, secondNode)
-	// }
+	if err == nil {
+		t.Fatalf("Pop() failed, should throw error. Node: %v, Err: %v", poppedNode, err)
+	}
 }
