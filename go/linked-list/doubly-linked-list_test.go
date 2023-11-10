@@ -83,3 +83,29 @@ func TestUnshift(t *testing.T) {
 		t.Fatalf("Unshift(2) failed, head/tail misconfigured. Head: %v, Tail: %v", list.Head, list.Tail)
 	}
 }
+
+func TestGet(t *testing.T) {
+	list := DoublyLinkedList{}
+	list.Push(1)
+	list.Push(2)
+	list.Push(3)
+	list.Push(4)
+	list.Push(5)
+
+	node := list.Get(1)
+	if node.Data != 2 {
+		t.Fatalf("Get(0) failed. Node: %v", node)
+	}
+	node = list.Get(3)
+	if node.Data != 4 {
+		t.Fatalf("Get(0) failed. Node: %v", node)
+	}
+	node = list.Get(10)
+	if node != nil {
+		t.Fatalf("Get(10) failed. Node: %v", node)
+	}
+	node = list.Get(-10)
+	if node != nil {
+		t.Fatalf("Get(-10) failed. Node: %v", node)
+	}
+}

@@ -102,7 +102,6 @@ func (list *DoublyLinkedList) Get(position int) *DoublyLinkedListNode {
 		// use next
 		i = 0
 		currentNode = list.Head
-		i++
 
 		for i != position {
 			currentNode = currentNode.Next
