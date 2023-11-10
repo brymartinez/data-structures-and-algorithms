@@ -126,3 +126,35 @@ func TestSet(t *testing.T) {
 		t.Fatalf("Set(2, 3) failed. Val: %v", val)
 	}
 }
+
+func TestInsert(t *testing.T) {
+	list := DoublyLinkedList{}
+
+	list.Insert(0, 1)
+
+	if list.Head.Data != 1 {
+		t.Fatalf("Insert(0, 1) failed. Head misconfigured. Head: %v", list.Head)
+	}
+
+	list.Insert(1, 3)
+
+	if list.Tail.Data != 3 {
+		t.Fatalf("Insert(1, 3) failed. Tail misconfigured. Tail: %v", list.Tail)
+	}
+
+	list.Insert(1, 2)
+
+	if list.Head.Next.Data != 2 {
+		t.Fatalf("Insert(1, 2) failed. Head misconfigured. Node: %v", list.Head.Next)
+	}
+
+	if list.Tail.Prev.Data != 2 {
+		t.Fatalf("Insert(1, 2) failed. Tail misconfigured. Node: %v", list.Tail.Prev)
+	}
+
+	list.Insert(3, 4)
+
+	if list.Tail.Data != 4 || list.Tail.Prev.Next.Data != 4 {
+		t.Fatalf("Insert(3, 4) failed. Tail misconfigured. Node: %v", list.Tail)
+	}
+}

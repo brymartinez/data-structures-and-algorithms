@@ -145,6 +145,7 @@ func (list *DoublyLinkedList) Insert(position int, element int) bool {
 		prevNode.Next = newNode
 		newNode.Next = nextNode
 		newNode.Prev = prevNode
+		nextNode.Prev = newNode
 	}
 
 	list.Length++

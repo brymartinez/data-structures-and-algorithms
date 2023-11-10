@@ -121,6 +121,7 @@ export class DoublyLinkedList<T = any> extends LinkedList<T> {
       prevNode.next = newNode;
       newNode.next = nextNode;
       newNode.prev = prevNode;
+      nextNode.prev = newNode;
     }
 
     this.length++;
