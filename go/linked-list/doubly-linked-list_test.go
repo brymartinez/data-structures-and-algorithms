@@ -197,3 +197,19 @@ func TestRemove(t *testing.T) {
 		t.Fatalf("Remove(28) failed. Did not return nil. Node: %v", node)
 	}
 }
+
+func TestDisplay(t *testing.T) {
+	list := DoublyLinkedList{}
+	list.Push(1)
+	list.Push(2)
+	list.Push(3)
+	list.Push(4)
+	list.Push(5)
+
+	display := list.Display()
+	for i := 0; i < len(display); i++ {
+		if display[i] != i+1 {
+			t.Fatalf("Display() failed. Expected: %v, Received: %v", i+1, display[i])
+		}
+	}
+}
