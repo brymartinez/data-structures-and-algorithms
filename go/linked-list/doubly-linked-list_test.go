@@ -68,3 +68,18 @@ func TestShift(t *testing.T) {
 		t.Fatalf("Shift() failed, list is not empty. Node: %v, Err: %v", node, err)
 	}
 }
+
+func TestUnshift(t *testing.T) {
+	list := DoublyLinkedList{}
+	list.Unshift(2)
+
+	if list.Head.Data != 2 || list.Tail.Data != 2 {
+		t.Fatalf("Unshift(2) failed, head/tail misconfigured. Head: %v, Tail: %v", list.Head, list.Tail)
+	}
+
+	list.Unshift(1)
+
+	if list.Head.Data != 1 || list.Tail.Data != 2 {
+		t.Fatalf("Unshift(2) failed, head/tail misconfigured. Head: %v, Tail: %v", list.Head, list.Tail)
+	}
+}
