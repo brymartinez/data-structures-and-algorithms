@@ -51,3 +51,20 @@ func TestPop(t *testing.T) {
 		t.Fatalf("Pop() failed, should throw error. Node: %v, Err: %v", poppedNode, err)
 	}
 }
+
+func TestShift(t *testing.T) {
+	list := DoublyLinkedList{}
+	list.Push(1)
+	list.Push(2)
+	node, err := list.Shift()
+
+	if err != nil || node == nil || node.Data != 1 || list.Head.Data != 2 {
+		t.Fatalf("Shift() failed, wrong node. Node: %v, Head: %v, Err: %v", node, list.Head, err)
+	}
+	list.Shift()
+
+	node, err = list.Shift()
+	if err == nil || node != nil {
+		t.Fatalf("Shift() failed, list is not empty. Node: %v, Err: %v", node, err)
+	}
+}
