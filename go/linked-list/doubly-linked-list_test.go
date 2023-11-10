@@ -109,3 +109,20 @@ func TestGet(t *testing.T) {
 		t.Fatalf("Get(-10) failed. Node: %v", node)
 	}
 }
+
+func TestSet(t *testing.T) {
+	list := DoublyLinkedList{}
+	list.Push(1)
+	list.Push(3)
+	list.Set(1, 2)
+
+	if list.Tail.Data != 2 {
+		t.Fatalf("Set(1, 2) failed. Node: %v", list.Tail.Data)
+	}
+
+	val := list.Set(2, 3)
+
+	if val != false {
+		t.Fatalf("Set(2, 3) failed. Val: %v", val)
+	}
+}
